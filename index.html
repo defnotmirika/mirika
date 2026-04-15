@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juan dela Cruz — IT Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #090c12;
+    --bg2: #0f1420;
+    --bg3: #151c2c;
+    --accent: #00e5be;
+    --accent2: #0077ff;
+    --text: #e8edf5;
+    --muted: #7a8aaa;
+    --border: rgba(0,229,190,0.15);
+    --card: rgba(15,20,32,0.8);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE + GRID OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,190,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,190,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(9,12,18,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.3rem;
+    color: var(--accent); letter-spacing: -0.5px;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.5px;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: transparent; border: 1px solid var(--accent);
+    color: var(--accent); padding: 0.5rem 1.2rem;
+    border-radius: 4px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+    font-weight: 500; text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover { background: var(--accent); color: var(--bg); }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 4rem 4rem;
+    gap: 4rem;
+  }
+  .hero-content { flex: 1; max-width: 600px; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,229,190,0.08); border: 1px solid var(--border);
+    color: var(--accent); padding: 0.4rem 1rem;
+    border-radius: 999px; font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-tag span { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 800; line-height: 1.05;
+    letter-spacing: -2px; margin-bottom: 1.5rem;
+  }
+  h1 .line { display: block; }
+  h1 .accent { color: var(--accent); }
+  .hero-desc {
+    color: var(--muted); font-size: 1.1rem; max-width: 480px;
+    margin-bottom: 2.5rem; line-height: 1.8;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: var(--bg);
+    padding: 0.85rem 2rem; border-radius: 4px;
+    font-family: 'DM Sans', sans-serif; font-weight: 600;
+    font-size: 0.95rem; text-decoration: none;
+    transition: opacity 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-ghost {
+    border: 1px solid rgba(255,255,255,0.15); color: var(--text);
+    padding: 0.85rem 2rem; border-radius: 4px;
+    font-family: 'DM Sans', sans-serif; font-weight: 400;
+    font-size: 0.95rem; text-decoration: none;
+    transition: border-color 0.2s; display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-visual {
+    flex: 0 0 340px;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .stat-card {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif; font-size: 2.5rem;
+    font-weight: 800; color: var(--accent); line-height: 1;
+  }
+  .stat-label { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* ── SECTION COMMON ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 6rem 4rem; }
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 0.75rem;
+    color: var(--accent); letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif; font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 800; letter-spacing: -1px; margin-bottom: 3rem;
+    line-height: 1.1;
+  }
+  .divider { width: 100%; height: 1px; background: var(--border); margin: 0; }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--bg2); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .skill-category {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+  }
+  .skill-cat-title {
+    font-family: 'DM Mono', monospace; font-size: 0.75rem;
+    color: var(--accent); letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    background: rgba(0,229,190,0.07); border: 1px solid rgba(0,229,190,0.2);
+    color: var(--text); padding: 0.3rem 0.8rem;
+    border-radius: 4px; font-size: 0.85rem; font-weight: 400;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .project-card:hover { border-color: rgba(0,229,190,0.4); transform: translateY(-4px); }
+  .project-card:hover::before { opacity: 1; }
+  .project-num {
+    font-family: 'DM Mono', monospace; font-size: 0.75rem;
+    color: var(--muted); margin-bottom: 1rem;
+  }
+  .project-title {
+    font-family: 'Syne', sans-serif; font-size: 1.3rem;
+    font-weight: 700; margin-bottom: 0.75rem; color: var(--text);
+  }
+  .project-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tech-badge {
+    background: rgba(0,119,255,0.1); border: 1px solid rgba(0,119,255,0.25);
+    color: #60a5fa; padding: 0.2rem 0.6rem;
+    border-radius: 3px; font-size: 0.78rem;
+    font-family: 'DM Mono', monospace;
+  }
+  .project-links { display: flex; gap: 1rem; margin-top: 1.5rem; }
+  .project-link {
+    color: var(--accent); font-size: 0.85rem; text-decoration: none;
+    font-weight: 500; transition: opacity 0.2s;
+  }
+  .project-link:hover { opacity: 0.7; }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--bg2); }
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 2rem; position: relative; padding-bottom: 3rem;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: 200px; top: 8px; bottom: 0;
+    width: 1px; background: var(--border); transform: translateX(calc(-50% + 8px));
+  }
+  .timeline-item:last-child::before { display: none; }
+  .timeline-date {
+    font-family: 'DM Mono', monospace; font-size: 0.8rem;
+    color: var(--muted); text-align: right; padding-top: 4px;
+    line-height: 1.5;
+  }
+  .timeline-body { position: relative; padding-left: 2rem; }
+  .timeline-body::before {
+    content: '';
+    position: absolute; left: 0; top: 6px;
+    width: 12px; height: 12px; border-radius: 50%;
+    border: 2px solid var(--accent); background: var(--bg);
+    transform: translateX(-6px);
+  }
+  .timeline-role {
+    font-family: 'Syne', sans-serif; font-size: 1.15rem;
+    font-weight: 700; margin-bottom: 0.25rem;
+  }
+  .timeline-company { color: var(--accent); font-size: 0.9rem; margin-bottom: 0.75rem; font-weight: 500; }
+  .timeline-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+  .timeline-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+
+  /* ── SEMINARS ── */
+  .seminars-list { display: flex; flex-direction: column; gap: 1px; }
+  .seminar-item {
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: center; gap: 2rem;
+    padding: 1.5rem 0; border-bottom: 1px solid var(--border);
+    transition: padding-left 0.2s;
+  }
+  .seminar-item:hover { padding-left: 1rem; }
+  .seminar-item:last-child { border-bottom: none; }
+  .seminar-title { font-weight: 500; font-size: 1rem; margin-bottom: 0.25rem; }
+  .seminar-org { color: var(--muted); font-size: 0.85rem; }
+  .seminar-date {
+    font-family: 'DM Mono', monospace; font-size: 0.8rem;
+    color: var(--accent); white-space: nowrap;
+  }
+
+  /* ── CERTIFICATES ── */
+  #certificates { background: var(--bg2); }
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .cert-card {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    transition: border-color 0.2s;
+  }
+  .cert-card:hover { border-color: rgba(0,229,190,0.4); }
+  .cert-icon {
+    width: 48px; height: 48px; border-radius: 10px;
+    background: rgba(0,229,190,0.1); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+  }
+  .cert-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; line-height: 1.3; }
+  .cert-issuer { color: var(--muted); font-size: 0.82rem; }
+  .cert-date {
+    font-family: 'DM Mono', monospace; font-size: 0.75rem;
+    color: var(--accent); margin-top: auto;
+  }
+  .cert-badge {
+    display: inline-block; background: rgba(0,229,190,0.08);
+    border: 1px solid rgba(0,229,190,0.2); color: var(--accent);
+    padding: 0.2rem 0.6rem; border-radius: 3px;
+    font-size: 0.73rem; font-family: 'DM Mono', monospace;
+  }
+
+  /* ── CONTACT ── */
+  #contact { text-align: center; }
+  .contact-inner { max-width: 600px; margin: 0 auto; }
+  .contact-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800; letter-spacing: -2px; margin-bottom: 1.5rem;
+    line-height: 1.05;
+  }
+  .contact-title .accent { color: var(--accent); }
+  .contact-desc { color: var(--muted); margin-bottom: 2.5rem; font-size: 1.05rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: var(--bg3); border: 1px solid var(--border);
+    color: var(--text); padding: 0.75rem 1.5rem;
+    border-radius: 8px; text-decoration: none; font-size: 0.9rem;
+    font-weight: 500; transition: border-color 0.2s, color 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border); padding: 2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--muted); font-size: 0.82rem;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── FADE IN ANIMATION ── */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    animation: fadeUp 0.7s ease forwards;
+  }
+  @keyframes fadeUp { to { opacity: 1; transform: none; } }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.25s; }
+  .delay-3 { animation-delay: 0.4s; }
+  .delay-4 { animation-delay: 0.55s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #hero { flex-direction: column; padding: 7rem 1.5rem 3rem; }
+    .hero-visual { flex: none; width: 100%; }
+    .container { padding: 4rem 1.5rem; }
+    .timeline-item { grid-template-columns: 1fr; }
+    .timeline-date { text-align: left; }
+    .timeline-item::before { display: none; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">JDC.</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#seminars">Seminars</a></li>
+    <li><a href="#certificates">Certificates</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Contact Me</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-tag fade-in"><span></span> Available for Opportunities</div>
+    <h1 class="fade-in delay-1">
+      <span class="line">Juan</span>
+      <span class="line">dela <span class="accent">Cruz.</span></span>
+    </h1>
+    <p class="hero-desc fade-in delay-2">
+      4th year BSIT student at Polytechnic University of the Philippines.
+      Passionate about web development, system design, and building solutions that matter.
+    </p>
+    <div class="hero-btns fade-in delay-3">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-visual fade-in delay-4">
+    <div class="stat-card">
+      <div class="stat-num">12+</div>
+      <div class="stat-label">Projects Completed</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num">8</div>
+        <div class="stat-label">Certificates</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Seminars</div>
+      </div>
+    </div>
+    <div class="stat-card" style="border-color: rgba(0,119,255,0.3);">
+      <div style="font-family:'DM Mono',monospace; font-size:0.72rem; color:var(--muted); margin-bottom:0.5rem;">CURRENTLY STUDYING</div>
+      <div style="font-size:0.95rem; font-weight:500;">Bachelor of Science in Information Technology</div>
+      <div style="color:var(--muted); font-size:0.82rem; margin-top:4px;">PUP Manila · 2021 – 2025</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">01 — Skills</div>
+    <div class="section-title">What I Work With</div>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <div class="skill-cat-title">Frontend</div>
+        <div class="skill-tags">
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Bootstrap</span>
+          <span class="skill-tag">Tailwind CSS</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">Backend</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PHP</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">REST API</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">Tools & Platforms</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git & GitHub</span>
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Postman</span>
+          <span class="skill-tag">XAMPP</span>
+          <span class="skill-tag">Linux</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">Soft Skills</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Problem Solving</span>
+          <span class="skill-tag">Team Leadership</span>
+          <span class="skill-tag">Communication</span>
+          <span class="skill-tag">Project Management</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">02 — Projects</div>
+    <div class="section-title">Things I've Built</div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-num">PROJECT_001</div>
+        <div class="project-title">Barangay Management System</div>
+        <div class="project-desc">A full-stack web application for managing barangay resident records, document requests, and blotter reports. Includes admin dashboard with analytics.</div>
+        <div class="project-tech">
+          <span class="tech-badge">PHP</span>
+          <span class="tech-badge">MySQL</span>
+          <span class="tech-badge">Bootstrap</span>
+          <span class="tech-badge">JavaScript</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="project-link">→ View Demo</a>
+          <a href="#" class="project-link">→ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PROJECT_002</div>
+        <div class="project-title">Online Enrollment System</div>
+        <div class="project-desc">Web-based enrollment platform for a local school. Handles student registration, subject enlistment, and generates enrollment reports for faculty.</div>
+        <div class="project-tech">
+          <span class="tech-badge">React</span>
+          <span class="tech-badge">Node.js</span>
+          <span class="tech-badge">MongoDB</span>
+          <span class="tech-badge">Express</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="project-link">→ View Demo</a>
+          <a href="#" class="project-link">→ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PROJECT_003</div>
+        <div class="project-title">Budget Tracker App</div>
+        <div class="project-desc">Mobile-first personal finance tracker with expense categorization, monthly reports, and chart visualizations. Built as capstone project.</div>
+        <div class="project-tech">
+          <span class="tech-badge">React</span>
+          <span class="tech-badge">Firebase</span>
+          <span class="tech-badge">Chart.js</span>
+          <span class="tech-badge">Tailwind</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="project-link">→ View Demo</a>
+          <a href="#" class="project-link">→ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PROJECT_004</div>
+        <div class="project-title">Library Inventory System</div>
+        <div class="project-desc">Desktop application for managing library books, member records, and borrowing transactions. Features barcode scanning and overdue notifications.</div>
+        <div class="project-tech">
+          <span class="tech-badge">Java</span>
+          <span class="tech-badge">JavaFX</span>
+          <span class="tech-badge">SQLite</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="project-link">→ View Demo</a>
+          <a href="#" class="project-link">→ GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">03 — Experience</div>
+    <div class="section-title">Where I've Been</div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-date">Jan 2025 –<br>Mar 2025</div>
+        <div class="timeline-body">
+          <div class="timeline-role">IT Intern (OJT)</div>
+          <div class="timeline-company">Accenture Philippines</div>
+          <div class="timeline-desc">Assisted in the development and testing of internal web applications. Collaborated with a cross-functional team of developers and QA engineers to deliver sprint deliverables on time.</div>
+          <div class="timeline-tags">
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">REST API</span>
+            <span class="skill-tag">Agile</span>
+            <span class="skill-tag">JIRA</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Aug 2023 –<br>May 2024</div>
+        <div class="timeline-body">
+          <div class="timeline-role">Web Developer (Freelance)</div>
+          <div class="timeline-company">Self-employed</div>
+          <div class="timeline-desc">Designed and developed websites for small businesses and local organizations. Managed client requirements, wireframing, development, and deployment independently.</div>
+          <div class="timeline-tags">
+            <span class="skill-tag">WordPress</span>
+            <span class="skill-tag">PHP</span>
+            <span class="skill-tag">UI/UX Design</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2022 – 2024</div>
+        <div class="timeline-body">
+          <div class="timeline-role">Technical Officer</div>
+          <div class="timeline-company">ICpEP-PUP Student Chapter</div>
+          <div class="timeline-desc">Led the technical committee in organizing IT-related events and seminars. Managed the organization's website and social media graphics.</div>
+          <div class="timeline-tags">
+            <span class="skill-tag">Leadership</span>
+            <span class="skill-tag">Event Management</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SEMINARS -->
+<section id="seminars">
+  <div class="container">
+    <div class="section-label">04 — Seminars & Events</div>
+    <div class="section-title">Learning Never Stops</div>
+    <div class="seminars-list">
+      <div class="seminar-item">
+        <div>
+          <div class="seminar-title">Google Cloud Study Jam — Cloud Computing Fundamentals</div>
+          <div class="seminar-org">Google Developers Group Philippines</div>
+        </div>
+        <div class="seminar-date">Mar 2025</div>
+      </div>
+      <div class="seminar-item">
+        <div>
+          <div class="seminar-title">PyCon Philippines 2025 — Python for Data Science & AI</div>
+          <div class="seminar-org">Python Philippines</div>
+        </div>
+        <div class="seminar-date">Feb 2025</div>
+      </div>
+      <div class="seminar-item">
+        <div>
+          <div class="seminar-title">National ICT Summit — Cybersecurity in the Modern Era</div>
+          <div class="seminar-org">DICT Philippines</div>
+        </div>
+        <div class="seminar-date">Nov 2024</div>
+      </div>
+      <div class="seminar-item">
+        <div>
+          <div class="seminar-title">DevFest Manila 2024 — AI & Machine Learning Workshop</div>
+          <div class="seminar-org">Google Developers Group Manila</div>
+        </div>
+        <div class="seminar-date">Oct 2024</div>
+      </div>
+      <div class="seminar-item">
+        <div>
+          <div class="seminar-title">AWS Cloud Practitioner Essentials Bootcamp</div>
+          <div class="seminar-org">Amazon Web Services (Online)</div>
+        </div>
+        <div class="seminar-date">Aug 2024</div>
+      </div>
+      <div class="seminar-item">
+        <div>
+          <div class="seminar-title">Hack for Good Hackathon — 2nd Place Winner</div>
+          <div class="seminar-org">CHED & DOST Philippines</div>
+        </div>
+        <div class="seminar-date">Jun 2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CERTIFICATES -->
+<section id="certificates">
+  <div class="container">
+    <div class="section-label">05 — Certificates & Badges</div>
+    <div class="section-title">Credentials Earned</div>
+    <div class="certs-grid">
+
+      <div class="cert-card">
+        <div class="cert-icon">☁️</div>
+        <div class="cert-name">AWS Cloud Practitioner</div>
+        <div class="cert-issuer">Amazon Web Services</div>
+        <span class="cert-badge">VERIFIED BADGE</span>
+        <div class="cert-date">Issued: Sep 2024</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon">🐍</div>
+        <div class="cert-name">Python for Everybody Specialization</div>
+        <div class="cert-issuer">Coursera — University of Michigan</div>
+        <span class="cert-badge">CERTIFICATE</span>
+        <div class="cert-date">Issued: Jul 2024</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon">🔒</div>
+        <div class="cert-name">Introduction to Cybersecurity</div>
+        <div class="cert-issuer">Cisco Networking Academy</div>
+        <span class="cert-badge">BADGE</span>
+        <div class="cert-date">Issued: May 2024</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon">📊</div>
+        <div class="cert-name">Google Data Analytics Certificate</div>
+        <div class="cert-issuer">Google via Coursera</div>
+        <span class="cert-badge">VERIFIED BADGE</span>
+        <div class="cert-date">Issued: Mar 2024</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon">⚛️</div>
+        <div class="cert-name">React — The Complete Guide</div>
+        <div class="cert-issuer">Udemy</div>
+        <span class="cert-badge">CERTIFICATE</span>
+        <div class="cert-date">Issued: Jan 2024</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon">🌐</div>
+        <div class="cert-name">Responsive Web Design</div>
+        <div class="cert-issuer">freeCodeCamp</div>
+        <span class="cert-badge">CERTIFICATE</span>
+        <div class="cert-date">Issued: Jun 2023</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="section-label" style="text-align:center;">06 — Contact</div>
+      <div class="contact-title">Let's <span class="accent">Connect.</span></div>
+      <div class="contact-desc">Open to opportunities, collaborations, and conversations. Feel free to reach out through any of the channels below.</div>
+      <div class="contact-links">
+        <a href="mailto:juandelacruz@email.com" class="contact-link">📧 Email Me</a>
+        <a href="https://github.com" class="contact-link">GitHub</a>
+        <a href="https://linkedin.com" class="contact-link">LinkedIn</a>
+        <a href="#" class="contact-link">📄 Download CV</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Juan dela Cruz</span>
+  <span>Built with HTML · CSS · JavaScript</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'none';
+        e.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.skill-category, .project-card, .timeline-item, .seminar-item, .cert-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
