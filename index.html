@@ -37,6 +37,15 @@
     pointer-events: none; z-index: 0;
   }
 
+  /* AMBIENT ORBS */
+  .orb {
+    position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
+    filter: blur(90px); opacity: 0.12; animation: floatOrb 8s ease-in-out infinite;
+  }
+  .orb1 { width: 500px; height: 500px; background: var(--accent); top: -100px; right: -100px; animation-delay: 0s; }
+  .orb2 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: -100px; animation-delay: -4s; }
+  @keyframes floatOrb { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.05); } }
+
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -57,36 +66,140 @@
   section { position: relative; z-index: 1; }
 
   /* HERO */
-  #hero { display: flex; align-items: center; justify-content: space-between; min-height: 100vh; padding: 8rem 4rem 4rem; gap: 3rem; }
-  .hero-content { flex: 1; max-width: 580px; }
-  .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,229,190,0.08); border: 1px solid var(--border); color: var(--accent); padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.8rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+  #hero {
+    display: flex; align-items: center; justify-content: space-between;
+    min-height: 100vh; padding: 7rem 4rem 4rem;
+    gap: 3rem; position: relative; z-index: 1;
+  }
+  .hero-content { flex: 1; max-width: 600px; }
+
+  .greeting-line {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 1rem;
+    opacity: 0; animation: slideUp 0.7s ease forwards 0.1s;
+  }
+  .greeting-text { font-family: 'DM Mono', monospace; font-size: 1rem; color: var(--muted); letter-spacing: 1px; }
+  .greeting-name { font-family: 'DM Mono', monospace; font-size: 1rem; color: var(--accent); letter-spacing: 1px; }
+  .cursor { display: inline-block; width: 2px; height: 1.1rem; background: var(--accent); margin-left: 2px; animation: blink 1s step-end infinite; }
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,229,190,0.08); border: 1px solid var(--border);
+    color: var(--accent); padding: 0.4rem 1rem;
+    border-radius: 999px; font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.2rem;
+    opacity: 0; animation: slideUp 0.7s ease forwards 0.25s;
+  }
   .hero-tag span { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
-  h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 1.5rem; }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.2rem);
+    font-weight: 800; line-height: 1.02; letter-spacing: -2px;
+    margin-bottom: 1.2rem;
+    opacity: 0; animation: slideUp 0.7s ease forwards 0.4s;
+  }
   h1 .line { display: block; }
   h1 .accent { color: var(--accent); }
-  .hero-desc { color: var(--muted); font-size: 1.1rem; max-width: 480px; margin-bottom: 2.5rem; line-height: 1.8; }
-  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn-primary { background: var(--accent); color: var(--bg); padding: 0.85rem 2rem; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: opacity 0.2s, transform 0.2s; display: inline-block; }
-  .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
-  .btn-ghost { border: 1px solid rgba(255,255,255,0.15); color: var(--text); padding: 0.85rem 2rem; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 0.95rem; text-decoration: none; transition: border-color 0.2s, transform 0.2s; display: inline-block; }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-  /* HERO RIGHT - PHOTO + STATS */
-  .hero-right { flex: 0 0 360px; display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
-  .profile-photo-wrapper { position: relative; width: 240px; height: 240px; margin-bottom: 0.5rem; }
-  .profile-photo-ring { position: absolute; inset: -8px; border-radius: 50%; border: 2px solid var(--accent); opacity: 0.4; animation: spin-slow 8s linear infinite; }
-  .profile-photo-ring2 { position: absolute; inset: -18px; border-radius: 50%; border: 1px dashed rgba(0,229,190,0.2); animation: spin-slow 14s linear infinite reverse; }
-  @keyframes spin-slow { to { transform: rotate(360deg); } }
-  .profile-img { width: 240px; height: 240px; border-radius: 50%; object-fit: cover; object-position: top; border: 3px solid var(--bg3); position: relative; z-index: 1; display: block; }
-  .profile-placeholder { width: 240px; height: 240px; border-radius: 50%; background: var(--bg3); border: 2px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; position: relative; z-index: 1; color: var(--muted); font-size: 0.8rem; text-align: center; padding: 1rem; }
-  .profile-glow { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle, rgba(0,229,190,0.08), transparent 70%); pointer-events: none; z-index: 2; }
-  .stat-grid { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
-  .stat-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; transition: border-color 0.2s, transform 0.2s; }
-  .stat-card:hover { border-color: rgba(0,229,190,0.4); transform: translateY(-2px); }
-  .stat-num { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--accent); line-height: 1; }
-  .stat-label { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
-  .stat-full { grid-column: 1/-1; }
+  .role-wrapper {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 1.4rem;
+    opacity: 0; animation: slideUp 0.7s ease forwards 0.55s;
+  }
+  .role-label { font-family: 'DM Mono', monospace; font-size: 0.82rem; color: var(--muted); letter-spacing: 1px; }
+  .role-switcher {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,119,255,0.08); border: 1px solid rgba(0,119,255,0.25);
+    padding: 0.3rem 0.9rem; border-radius: 999px;
+  }
+  .role-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; animation: pulse 2s infinite; }
+  .role-text { font-family: 'DM Mono', monospace; font-size: 0.82rem; color: #60a5fa; letter-spacing: 0.5px; min-width: 200px; transition: opacity 0.3s, transform 0.3s; }
+
+  .hero-desc {
+    color: var(--muted); font-size: 1.05rem; max-width: 500px;
+    margin-bottom: 2rem; line-height: 1.85;
+    opacity: 0; animation: slideUp 0.7s ease forwards 0.7s;
+  }
+  .hero-desc strong { color: var(--text); font-weight: 500; }
+
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; animation: slideUp 0.7s ease forwards 0.85s;
+  }
+  .btn-primary {
+    background: var(--accent); color: var(--bg);
+    padding: 0.85rem 2rem; border-radius: 6px;
+    font-family: 'DM Sans', sans-serif; font-weight: 700;
+    font-size: 0.92rem; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-3px); box-shadow: 0 0 30px rgba(0,229,190,0.25); }
+  .btn-ghost {
+    border: 1px solid rgba(255,255,255,0.15); color: var(--text);
+    padding: 0.85rem 2rem; border-radius: 6px;
+    font-family: 'DM Sans', sans-serif; font-weight: 400;
+    font-size: 0.92rem; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
+
+  /* HERO RIGHT */
+  .hero-right {
+    flex: 0 0 340px; display: flex; flex-direction: column;
+    align-items: center; gap: 1rem;
+    opacity: 0; animation: slideUp 0.7s ease forwards 0.5s;
+  }
+  .profile-photo-wrapper { position: relative; width: 220px; height: 220px; margin-bottom: 0.4rem; }
+  .ring-outer { position: absolute; inset: -14px; border-radius: 50%; border: 1px dashed rgba(0,229,190,0.25); animation: spin 16s linear infinite; }
+  .ring-inner { position: absolute; inset: -6px; border-radius: 50%; border: 1.5px solid rgba(0,229,190,0.5); animation: spin 10s linear infinite reverse; }
+  .ring-inner::before {
+    content: ''; position: absolute; top: 50%; left: -5px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent); transform: translateY(-50%);
+    box-shadow: 0 0 12px var(--accent);
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .profile-img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; object-position: top; border: 3px solid var(--bg3); position: relative; z-index: 1; display: block; }
+  .profile-placeholder { width: 220px; height: 220px; border-radius: 50%; background: var(--bg3); border: 2px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; position: relative; z-index: 1; color: var(--muted); font-size: 0.8rem; text-align: center; padding: 1rem; }
+  .profile-glow { position: absolute; inset: -20px; border-radius: 50%; background: radial-gradient(circle, rgba(0,229,190,0.12), transparent 65%); pointer-events: none; z-index: 0; }
+
+  .badge-float {
+    position: absolute; display: flex; align-items: center; gap: 7px;
+    background: rgba(15,20,32,0.92); border: 1px solid var(--border);
+    padding: 0.45rem 0.9rem; border-radius: 10px;
+    backdrop-filter: blur(12px); z-index: 3;
+    animation: floatBadge 4s ease-in-out infinite;
+  }
+  .badge-float .bdot { width: 8px; height: 8px; border-radius: 50%; }
+  .badge-float .btxt { font-size: 0.78rem; font-weight: 500; white-space: nowrap; }
+  .badge-float .bsub { font-size: 0.68rem; color: var(--muted); }
+  .badge-qcu { top: 20px; left: -60px; animation-delay: 0s; }
+  .badge-qcu .bdot { background: #0077ff; }
+  .badge-ojt { bottom: 30px; right: -50px; animation-delay: -2s; }
+  .badge-ojt .bdot { background: var(--accent); }
+  @keyframes floatBadge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+  .stat-grid { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+  .stat-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem; transition: border-color 0.25s, transform 0.25s; position: relative; overflow: hidden; }
+  .stat-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,229,190,0.03) 0%, transparent 60%); pointer-events: none; }
+  .stat-card:hover { border-color: rgba(0,229,190,0.35); transform: translateY(-3px); }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1; }
+  .stat-label { color: var(--muted); font-size: 0.8rem; margin-top: 4px; }
+  .study-card { grid-column: 1/-1; background: linear-gradient(135deg, rgba(0,119,255,0.08) 0%, rgba(0,229,190,0.04) 100%); border: 1px solid rgba(0,119,255,0.25); border-radius: 12px; padding: 1.1rem; }
+  .study-badge { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); letter-spacing: 2px; margin-bottom: 0.4rem; }
+  .study-title { font-size: 0.9rem; font-weight: 500; }
+  .study-sub { color: var(--muted); font-size: 0.78rem; margin-top: 3px; }
+  .study-bar { height: 3px; background: rgba(255,255,255,0.08); border-radius: 999px; margin-top: 0.75rem; overflow: hidden; }
+  .study-fill { height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent)); border-radius: 999px; width: 75%; animation: barGrow 1.5s ease forwards 1.2s; transform-origin: left; transform: scaleX(0); }
+  @keyframes barGrow { to { transform: scaleX(1); } }
+  .study-pct { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); margin-top: 4px; }
+
+  @keyframes slideUp { from { opacity:0; transform: translateY(28px); } to { opacity:1; transform: none; } }
 
   /* SECTIONS */
   .container { max-width: 1100px; margin: 0 auto; padding: 6rem 4rem; }
@@ -143,25 +256,12 @@
   .seminar-org { color: var(--muted); font-size: 0.85rem; }
   .seminar-date { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--accent); white-space: nowrap; }
 
-  /* ── CERTIFICATES ── */
+  /* CERTIFICATES */
   #certificates { background: var(--bg2); }
   .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
-  .cert-card {
-    background: var(--bg3); border: 1px solid var(--border);
-    border-radius: 12px; padding: 1.5rem;
-    display: flex; flex-direction: column; gap: 0.75rem;
-    cursor: pointer;
-    transition: border-color 0.25s, transform 0.25s;
-    position: relative; overflow: hidden;
-  }
+  .cert-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; cursor: pointer; transition: border-color 0.25s, transform 0.25s; position: relative; overflow: hidden; }
   .cert-card:hover { border-color: rgba(0,229,190,0.45); transform: translateY(-4px); }
-  .cert-card::after {
-    content: 'CLICK TO VIEW →';
-    position: absolute; bottom: 1rem; right: 1rem;
-    font-family: 'DM Mono', monospace; font-size: 0.62rem;
-    color: var(--accent); opacity: 0;
-    transition: opacity 0.2s; letter-spacing: 1px;
-  }
+  .cert-card::after { content: 'CLICK TO VIEW →'; position: absolute; bottom: 1rem; right: 1rem; font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--accent); opacity: 0; transition: opacity 0.2s; letter-spacing: 1px; }
   .cert-card:hover::after { opacity: 1; }
   .cert-icon { width: 48px; height: 48px; border-radius: 10px; background: rgba(0,229,190,0.1); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
   .cert-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; line-height: 1.3; }
@@ -169,58 +269,21 @@
   .cert-date { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); margin-top: auto; }
   .cert-badge { display: inline-block; background: rgba(0,229,190,0.08); border: 1px solid rgba(0,229,190,0.2); color: var(--accent); padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.73rem; font-family: 'DM Mono', monospace; }
 
-  /* ── CERTIFICATE MODAL ── */
-  .cert-modal {
-    position: fixed; inset: 0; z-index: 999;
-    display: flex; align-items: center; justify-content: center;
-    padding: 2rem;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.3s;
-  }
+  /* MODAL */
+  .cert-modal { position: fixed; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center; padding: 2rem; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
   .cert-modal.open { opacity: 1; pointer-events: all; }
-  .cert-modal-bg {
-    position: absolute; inset: 0;
-    background: rgba(4,6,13,0.92);
-    backdrop-filter: blur(20px);
-    cursor: pointer;
-  }
-  .cert-modal-inner {
-    position: relative; z-index: 1;
-    background: var(--bg3); border: 1px solid var(--border);
-    border-radius: 20px; padding: 2rem;
-    max-width: 680px; width: 100%;
-    transform: scale(0.9) translateY(20px);
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    max-height: 90vh; overflow-y: auto;
-  }
+  .cert-modal-bg { position: absolute; inset: 0; background: rgba(4,6,13,0.92); backdrop-filter: blur(20px); cursor: pointer; }
+  .cert-modal-inner { position: relative; z-index: 1; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; max-width: 680px; width: 100%; transform: scale(0.9) translateY(20px); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); max-height: 90vh; overflow-y: auto; }
   .cert-modal.open .cert-modal-inner { transform: scale(1) translateY(0); }
   .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; gap: 1rem; }
   .modal-cert-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; margin-bottom: 0.25rem; }
   .modal-cert-issuer { color: var(--muted); font-size: 0.88rem; }
   .modal-cert-date { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); margin-top: 0.4rem; }
-  .modal-close {
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    color: var(--muted); width: 36px; height: 36px; border-radius: 8px;
-    cursor: pointer; font-size: 1.1rem; display: flex;
-    align-items: center; justify-content: center;
-    transition: background 0.2s, color 0.2s; flex-shrink: 0;
-  }
+  .modal-close { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--muted); width: 36px; height: 36px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s, color 0.2s; flex-shrink: 0; }
   .modal-close:hover { background: rgba(0,229,190,0.1); color: var(--accent); }
-  .modal-img-area {
-    width: 100%; border-radius: 12px;
-    overflow: hidden; border: 1px solid var(--border);
-    background: #fff; min-height: 200px;
-    display: flex; align-items: center; justify-content: center;
-  }
+  .modal-img-area { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: #fff; min-height: 200px; display: flex; align-items: center; justify-content: center; }
   .modal-img-area img { width: 100%; height: auto; display: block; }
-  .modal-placeholder {
-    width: 100%; min-height: 260px; border-radius: 12px;
-    background: rgba(0,229,190,0.03);
-    border: 2px dashed var(--border);
-    display: flex; flex-direction: column; align-items: center;
-    justify-content: center; gap: 1rem; color: var(--muted);
-    padding: 2rem; text-align: center;
-  }
+  .modal-placeholder { width: 100%; min-height: 260px; border-radius: 12px; background: rgba(0,229,190,0.03); border: 2px dashed var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: var(--muted); padding: 2rem; text-align: center; }
   .modal-placeholder-icon { font-size: 3rem; }
   .modal-placeholder-text { font-size: 0.85rem; line-height: 1.7; }
   .modal-placeholder-text code { color: var(--accent); font-family: 'DM Mono', monospace; font-size: 0.82rem; background: rgba(0,229,190,0.08); padding: 0.1rem 0.4rem; border-radius: 3px; }
@@ -238,25 +301,16 @@
   /* FOOTER */
   footer { border-top: 1px solid var(--border); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 0.82rem; font-family: 'DM Mono', monospace; position: relative; z-index: 1; }
 
-  /* ANIMATIONS */
+  /* REVEAL */
   .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: none; }
-  .fade-in { opacity: 0; transform: translateY(24px); animation: fadeUp 0.7s ease forwards; }
-  @keyframes fadeUp { to { opacity: 1; transform: none; } }
-  .delay-1 { animation-delay: 0.1s; }
-  .delay-2 { animation-delay: 0.25s; }
-  .delay-3 { animation-delay: 0.4s; }
-  .delay-4 { animation-delay: 0.55s; }
-  .delay-5 { animation-delay: 0.7s; }
-
-  /* COUNTER */
-  .count-num { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--accent); line-height: 1; }
 
   @media (max-width: 900px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
     #hero { flex-direction: column; padding: 7rem 1.5rem 3rem; }
     .hero-right { width: 100%; }
+    .badge-float { display: none; }
     .container { padding: 4rem 1.5rem; }
     .timeline-item { grid-template-columns: 1fr; }
     .timeline-date { text-align: left; }
@@ -266,6 +320,9 @@
 </style>
 </head>
 <body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
 
 <!-- NAV -->
 <nav id="navbar">
@@ -283,26 +340,62 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-content">
-    <div class="hero-tag fade-in"><span></span> Available for Opportunities</div>
-    <h1 class="fade-in delay-1">
+
+    <div class="greeting-line">
+      <span class="greeting-text">👋 Hello, I'm&nbsp;</span>
+      <span class="greeting-name" id="typed-name"></span>
+      <span class="cursor"></span>
+    </div>
+
+    <div class="hero-tag">
+      <span></span>
+      Available for Opportunities
+    </div>
+
+    <h1>
       <span class="line">Charity</span>
       <span class="line">Del <span class="accent">Rosario.</span></span>
     </h1>
-    <p class="hero-desc fade-in delay-2">
-      4th year BSIT student at Quezon City University.
-      Passionate about web development, system design, and building solutions that matter.
+
+    <div class="role-wrapper">
+      <span class="role-label">I'm a</span>
+      <div class="role-switcher">
+        <span class="role-dot"></span>
+        <span class="role-text" id="role-text">Web Developer</span>
+      </div>
+    </div>
+
+    <p class="hero-desc">
+      4th year <strong>BSIT student at Quezon City University</strong>,
+      passionate about crafting digital experiences through web development,
+      system design, and building solutions that create real-world impact.
     </p>
-    <div class="hero-btns fade-in delay-3">
-      <a href="#projects" class="btn-primary">View Projects</a>
-      <a href="#contact" class="btn-ghost">Get in Touch</a>
+
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        View Projects
+      </a>
+      <a href="#contact" class="btn-ghost">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Get in Touch
+      </a>
     </div>
   </div>
 
-  <div class="hero-right fade-in delay-4">
+  <div class="hero-right">
     <div class="profile-photo-wrapper">
-      <div class="profile-photo-ring"></div>
-      <div class="profile-photo-ring2"></div>
-      <!-- If cha.jpg exists it shows, otherwise shows placeholder -->
+      <div class="ring-outer"></div>
+      <div class="ring-inner"></div>
+      <div class="profile-glow"></div>
+      <div class="badge-float badge-qcu">
+        <span class="bdot"></span>
+        <div><div class="btxt">QCU</div><div class="bsub">BSIT · 2022–2026</div></div>
+      </div>
+      <div class="badge-float badge-ojt">
+        <span class="bdot"></span>
+        <div><div class="btxt" style="color:var(--accent)">OJT @ DepEd NCR</div><div class="bsub">IT Intern</div></div>
+      </div>
       <img src="cha.jpg" alt="Charity Del Rosario" class="profile-img"
            onerror="this.style.display='none'; document.getElementById('photo-placeholder').style.display='flex';">
       <div class="profile-placeholder" id="photo-placeholder" style="display:none;">
@@ -311,26 +404,31 @@
         </svg>
         <span style="font-size:0.75rem;">Upload <code style="color:var(--accent)">cha.jpg</code></span>
       </div>
-      <div class="profile-glow"></div>
     </div>
 
     <div class="stat-grid">
       <div class="stat-card">
-        <div class="count-num" data-target="8">0</div>
-        <div class="stat-label">Projects Completed</div>
+        <div class="stat-num" data-target="8">0</div>
+        <div class="stat-label">Projects</div>
       </div>
       <div class="stat-card">
-        <div class="count-num" data-target="10">0</div>
+        <div class="stat-num" data-target="10">0</div>
         <div class="stat-label">Certificates</div>
       </div>
       <div class="stat-card">
-        <div class="count-num" data-target="10">0</div>
+        <div class="stat-num" data-target="10">0</div>
         <div class="stat-label">Seminars</div>
       </div>
-      <div class="stat-card stat-full" style="border-color:rgba(0,119,255,0.3)">
-        <div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);margin-bottom:0.5rem;">CURRENTLY STUDYING</div>
-        <div style="font-size:0.95rem;font-weight:500;">Bachelor of Science in Information Technology</div>
-        <div style="color:var(--muted);font-size:0.82rem;margin-top:4px;">QCU · 2022 – 2026</div>
+      <div class="stat-card">
+        <div class="stat-num" data-target="2">0</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="study-card">
+        <div class="study-badge">CURRENTLY STUDYING</div>
+        <div class="study-title">Bachelor of Science in Information Technology</div>
+        <div class="study-sub">Quezon City University · 2022–2026</div>
+        <div class="study-bar"><div class="study-fill"></div></div>
+        <div class="study-pct">75% Complete — Final Year</div>
       </div>
     </div>
   </div>
@@ -417,7 +515,7 @@
       </div>
       <div class="project-card reveal">
         <div class="project-num">PROJECT_006</div>
-        <div class="project-title">RFID- Based Student Attendance System</div>
+        <div class="project-title">RFID-Based Student Attendance System</div>
         <div class="project-desc">An automated attendance tracking system using RFID card scanning. Students tap their ID cards to log attendance in real time, with a web dashboard for teachers to view records, generate reports, and monitor tardiness.</div>
         <div class="project-tech"><span class="tech-badge">RFID Scanner</span><span class="tech-badge">PHP</span><span class="tech-badge">MySQL</span><span class="tech-badge">JavaScript</span></div>
         <div class="project-links"><a href="#" class="project-link">→ View Demo</a><a href="https://github.com/defnotmirika" class="project-link">→ GitHub</a></div>
@@ -440,7 +538,7 @@
           <div class="timeline-role">IT Intern (OJT)</div>
           <div class="timeline-company">Department of Education - NCR IT</div>
           <div class="timeline-desc">Assisted in the development and testing of internal web applications. Collaborated with a cross-functional team of developers and QA engineers to deliver sprint deliverables on time.</div>
-          <div class="timeline-tags"><span class="skill-tag">C#</span><span class="skill-tag">REST API</span><span class="skill-tag">Excell</span><span class="skill-tag">Python</span></div>
+          <div class="timeline-tags"><span class="skill-tag">C#</span><span class="skill-tag">REST API</span><span class="skill-tag">Excel</span><span class="skill-tag">Python</span></div>
         </div>
       </div>
       <div class="timeline-item reveal">
@@ -481,7 +579,6 @@
     <div class="section-label reveal">05 — Certificates & Badges</div>
     <div class="section-title reveal">Credentials Earned</div>
     <div class="certs-grid">
-
       <div class="cert-card reveal" onclick="openModal('ai1')">
         <div class="cert-icon">⚛️</div>
         <div class="cert-name">AI in Education: How Students Can Use AI Responsibly</div>
@@ -489,7 +586,6 @@
         <span class="cert-badge">CERTIFICATE</span>
         <div class="cert-date">Issued: Feb 2026</div>
       </div>
-
       <div class="cert-card reveal" onclick="openModal('cisco1')">
         <div class="cert-icon">🌐</div>
         <div class="cert-name">AI Fundamentals with IBM Skillsbuild</div>
@@ -497,7 +593,6 @@
         <span class="cert-badge">CERTIFICATE</span>
         <div class="cert-date">Issued: Mar 2026</div>
       </div>
-
       <div class="cert-card reveal" onclick="openModal('cisco2')">
         <div class="cert-icon">🌐</div>
         <div class="cert-name">Introduction to Cybersecurity</div>
@@ -505,7 +600,6 @@
         <span class="cert-badge">CERTIFICATE</span>
         <div class="cert-date">Issued: Feb 2026</div>
       </div>
-
       <div class="cert-card reveal" onclick="openModal('cisco3')">
         <div class="cert-icon">🌐</div>
         <div class="cert-name">Introduction to Data Science</div>
@@ -513,7 +607,6 @@
         <span class="cert-badge">CERTIFICATE</span>
         <div class="cert-date">Issued: Feb 2026</div>
       </div>
-
       <div class="cert-card reveal" onclick="openModal('cisco4')">
         <div class="cert-icon">🌐</div>
         <div class="cert-name">Network Defense</div>
@@ -521,7 +614,6 @@
         <span class="cert-badge">CERTIFICATE</span>
         <div class="cert-date">Issued: Mar 2026</div>
       </div>
-
       <div class="cert-card reveal" onclick="openModal('ai2')">
         <div class="cert-icon">⚛️</div>
         <div class="cert-name">The Future of Work using Artificial Intelligence</div>
@@ -529,7 +621,6 @@
         <span class="cert-badge">CERTIFICATE</span>
         <div class="cert-date">Issued: Dec 2023</div>
       </div>
-
     </div>
   </div>
 </section>
@@ -561,7 +652,7 @@
       <div class="contact-desc reveal">Open to opportunities, collaborations, and conversations. Feel free to reach out through any of the channels below.</div>
       <div class="contact-links reveal">
         <a href="mailto:delrosario.charity.watemar@gmail.com" class="contact-link">📧 Email Me</a>
-        <a href="https://github.com/defnotmirika" class="contact-link">GitHub</a>
+        <a href="https://github.com/defnotmirika" class="contact-link" target="_blank">GitHub</a>
         <a href="CDR-CV.pdf" download class="contact-link">📄 Download CV</a>
       </div>
     </div>
@@ -574,7 +665,7 @@
 </footer>
 
 <script>
-/* ── NAV SCROLL ── */
+/* NAV SCROLL */
 const navbar = document.getElementById('navbar');
 const navLinks = document.querySelectorAll('.nav-links a');
 const sections = document.querySelectorAll('section[id]');
@@ -585,16 +676,45 @@ window.addEventListener('scroll', () => {
   navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
 });
 
-/* ── SCROLL REVEAL ── */
+/* SCROLL REVEAL */
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 60); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-/* ── COUNTER ANIMATION ── */
+/* TYPEWRITER */
+const fullName = "Charity Del Rosario";
+const typedEl = document.getElementById('typed-name');
+let ti = 0;
+function typeNext() {
+  if (ti <= fullName.length) {
+    typedEl.textContent = fullName.slice(0, ti);
+    ti++;
+    setTimeout(typeNext, ti === 1 ? 600 : 60);
+  }
+}
+setTimeout(typeNext, 300);
+
+/* ROLE SWITCHER */
+const roles = ['Web Developer', 'IT Student', 'System Designer', 'Problem Solver', 'UI/UX Enthusiast'];
+let ri = 0;
+const roleEl = document.getElementById('role-text');
+function switchRole() {
+  roleEl.style.opacity = '0';
+  roleEl.style.transform = 'translateY(-8px)';
+  roleEl.style.transition = 'opacity 0.3s, transform 0.3s';
+  setTimeout(() => {
+    ri = (ri + 1) % roles.length;
+    roleEl.textContent = roles[ri];
+    roleEl.style.opacity = '1';
+    roleEl.style.transform = 'translateY(0)';
+  }, 320);
+}
+setInterval(switchRole, 2800);
+
+/* COUNTER */
 function animCount(el, target) {
-  let v = 0;
-  const step = target / 40;
+  let v = 0; const step = target / 40;
   const t = setInterval(() => {
     v += step;
     if (v >= target) { el.textContent = target + '+'; clearInterval(t); return; }
@@ -608,16 +728,15 @@ const countObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 document.querySelectorAll('[data-target]').forEach(el => countObs.observe(el));
 
-/* ── CERTIFICATE MODAL ── */
+/* CERTIFICATE MODAL */
 const certData = {
-  ai1:    { name: 'AI in Education: How Students Can Use AI Responsibly',            issuer: 'NCBA-ISSOC',             date: 'Issued: February 2026', img: 'ncba-issoc.jpg' },
-  cisco1: { name: 'AI Fundamentals with IBM Skillsbuild', issuer: 'Cisco Network Academy', date: 'Issued: March 2026',      img: 'ai-fundamental.png' },
-  cisco2:  { name: 'Introduction to Cybersecurity',     issuer: 'Cisco Networking Academy',        date: 'Issued: February 2026',       img: 'introduction-cyber.png' },
-  cisco3: { name: 'Introduction to Data Science', issuer: 'Cisco Network Academy',             date: 'Issued: February 2026',     img: 'introduction-data.png' },
-  cisco4:  { name: 'Network Defense',        issuer: 'Cisco Network Academy',                           date: 'Issued: March 2026',   img: 'network-defense.png' },
-  ai2:    { name: 'The Future of Work using Artificial Intelligence',             issuer: 'Ignite Summit',                    date: 'Issued: December 2023',      img: 'ignite-summit.png' }
+  ai1:    { name: 'AI in Education: How Students Can Use AI Responsibly',   issuer: 'NCBA-ISSOC',              date: 'Issued: February 2026',  img: 'ncba-issoc.jpg' },
+  cisco1: { name: 'AI Fundamentals with IBM Skillsbuild',                   issuer: 'Cisco Network Academy',   date: 'Issued: March 2026',     img: 'ai-fundamental.png' },
+  cisco2: { name: 'Introduction to Cybersecurity',                          issuer: 'Cisco Networking Academy', date: 'Issued: February 2026', img: 'introduction-cyber.png' },
+  cisco3: { name: 'Introduction to Data Science',                           issuer: 'Cisco Network Academy',   date: 'Issued: February 2026',  img: 'introduction-data.png' },
+  cisco4: { name: 'Network Defense',                                        issuer: 'Cisco Network Academy',   date: 'Issued: March 2026',     img: 'network-defense.png' },
+  ai2:    { name: 'The Future of Work using Artificial Intelligence',       issuer: 'Ignite Summit',           date: 'Issued: December 2023',  img: 'ignite-summit.png' }
 };
-
 function openModal(id) {
   const c = certData[id]; if (!c) return;
   document.getElementById('modal-name').textContent = c.name;
