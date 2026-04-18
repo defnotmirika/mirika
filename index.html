@@ -478,52 +478,52 @@
     <div class="section-title reveal">Credentials Earned</div>
     <div class="certs-grid">
 
-      <div class="cert-card reveal" onclick="openModal('aws')">
+      <div class="cert-card reveal" onclick="openModal('ai1')">
         <div class="cert-icon">☁️</div>
-        <div class="cert-name">AWS Cloud Practitioner</div>
-        <div class="cert-issuer">Amazon Web Services</div>
-        <span class="cert-badge">VERIFIED BADGE</span>
-        <div class="cert-date">Issued: Sep 2024</div>
-      </div>
-
-      <div class="cert-card reveal" onclick="openModal('python')">
-        <div class="cert-icon">🐍</div>
-        <div class="cert-name">Python for Everybody Specialization</div>
-        <div class="cert-issuer">Coursera — University of Michigan</div>
+        <div class="cert-name">AI in Education: How Students Can Use AI Responsibly</div>
+        <div class="cert-issuer">NCBA-ISSOC</div>
         <span class="cert-badge">CERTIFICATE</span>
-        <div class="cert-date">Issued: Jul 2024</div>
+        <div class="cert-date">Issued: Feb 2026</div>
       </div>
 
-      <div class="cert-card reveal" onclick="openModal('cisco')">
+      <div class="cert-card reveal" onclick="openModal('cisco1')">
+        <div class="cert-icon">🐍</div>
+        <div class="cert-name">AI Fundamentals with IBM Skillsbuild</div>
+        <div class="cert-issuer">Cisco Network Academy</div>
+        <span class="cert-badge">CERTIFICATE</span>
+        <div class="cert-date">Issued: Mar 2026</div>
+      </div>
+
+      <div class="cert-card reveal" onclick="openModal('cisco2')">
         <div class="cert-icon">🔒</div>
         <div class="cert-name">Introduction to Cybersecurity</div>
         <div class="cert-issuer">Cisco Networking Academy</div>
-        <span class="cert-badge">BADGE</span>
-        <div class="cert-date">Issued: May 2024</div>
+        <span class="cert-badge">CERTIFICATE</span>
+        <div class="cert-date">Issued: Feb 2026</div>
       </div>
 
-      <div class="cert-card reveal" onclick="openModal('google')">
+      <div class="cert-card reveal" onclick="openModal('cisco3')">
         <div class="cert-icon">📊</div>
-        <div class="cert-name">Google Data Analytics Certificate</div>
-        <div class="cert-issuer">Google via Coursera</div>
-        <span class="cert-badge">VERIFIED BADGE</span>
-        <div class="cert-date">Issued: Mar 2024</div>
+        <div class="cert-name">Introduction to Data Science</div>
+        <div class="cert-issuer">Cisco Networking Academy</div>
+        <span class="cert-badge">CERTIFICATE</span>
+        <div class="cert-date">Issued: Feb 2026</div>
       </div>
 
-      <div class="cert-card reveal" onclick="openModal('react')">
+      <div class="cert-card reveal" onclick="openModal('cisco4')">
         <div class="cert-icon">⚛️</div>
-        <div class="cert-name">React — The Complete Guide</div>
-        <div class="cert-issuer">Udemy</div>
+        <div class="cert-name">Network Defense</div>
+        <div class="cert-issuer">Cisco Networking Academy</div>
         <span class="cert-badge">CERTIFICATE</span>
-        <div class="cert-date">Issued: Jan 2024</div>
+        <div class="cert-date">Issued: Mar 2026</div>
       </div>
 
-      <div class="cert-card reveal" onclick="openModal('fcc')">
+      <div class="cert-card reveal" onclick="openModal('ai2')">
         <div class="cert-icon">🌐</div>
-        <div class="cert-name">Responsive Web Design</div>
-        <div class="cert-issuer">freeCodeCamp</div>
+        <div class="cert-name">The Future of Work using Artificial Intelligence</div>
+        <div class="cert-issuer">Ignite Summit</div>
         <span class="cert-badge">CERTIFICATE</span>
-        <div class="cert-date">Issued: Jun 2023</div>
+        <div class="cert-date">Issued: Dec 2023</div>
       </div>
 
     </div>
@@ -607,12 +607,12 @@ document.querySelectorAll('[data-target]').forEach(el => countObs.observe(el));
 
 /* ── CERTIFICATE MODAL ── */
 const certData = {
-  ai:    { name: 'AI in Education: How Students Can Use AI Responsibly',            issuer: 'NCBA-ISSOC',             date: 'Issued: February 2026', img: 'ncba-issoc.jpg' },
-  cisco: { name: 'AI Fundamentals with IBM Skillsbuild', issuer: 'Cisco Network Academy', date: 'Issued: March 2026',      img: 'ai-fundamental.png' },
-  cisco:  { name: 'Introduction to Cybersecurity',     issuer: 'Cisco Networking Academy',        date: 'Issued: February 2026',       img: 'introduction-cyber.png' },
-  cisco: { name: 'Introduction to Data Science', issuer: 'Cisco Network Academy',             date: 'Issued: February 2026',     img: 'introduction-data.png' },
-  cisco:  { name: 'Network Defense',        issuer: 'Cisco Network Academy',                           date: 'Issued: March 2026',   img: 'network-defense.png' },
-  ai:    { name: 'The Future of Work using Artificial Intelligence',             issuer: 'Ignite Summit',                    date: 'Issued: December 2023',      img: 'ignite-summit.png' }
+  ai1:    { name: 'AI in Education: How Students Can Use AI Responsibly',            issuer: 'NCBA-ISSOC',             date: 'Issued: February 2026', img: 'ncba-issoc.jpg' },
+  cisco1: { name: 'AI Fundamentals with IBM Skillsbuild', issuer: 'Cisco Network Academy', date: 'Issued: March 2026',      img: 'ai-fundamental.png' },
+  cisco2:  { name: 'Introduction to Cybersecurity',     issuer: 'Cisco Networking Academy',        date: 'Issued: February 2026',       img: 'introduction-cyber.png' },
+  cisco3: { name: 'Introduction to Data Science', issuer: 'Cisco Network Academy',             date: 'Issued: February 2026',     img: 'introduction-data.png' },
+  cisco4:  { name: 'Network Defense',        issuer: 'Cisco Network Academy',                           date: 'Issued: March 2026',   img: 'network-defense.png' },
+  ai2:    { name: 'The Future of Work using Artificial Intelligence',             issuer: 'Ignite Summit',                    date: 'Issued: December 2023',      img: 'ignite-summit.png' }
 };
 
 function openModal(id) {
